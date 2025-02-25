@@ -12,6 +12,7 @@ function QuestionList({questions}) {
           {questions.map((question) => 
           <QuestionItem key={question.id} question={question} />
           )}
+
       </ul>
 
       
