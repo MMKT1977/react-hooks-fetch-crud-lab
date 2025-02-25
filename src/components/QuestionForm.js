@@ -18,7 +18,7 @@ function QuestionForm({onAddQuestion}) {
   }
 
   function handleSubmit(e) {
-    e.preventDefault(); // Prevent page refresh
+    e.preventDefault(); 
 
     const newQuestion = {
       prompt: formData.prompt,

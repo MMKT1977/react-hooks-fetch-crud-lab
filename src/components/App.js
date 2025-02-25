@@ -18,13 +18,26 @@ function App() {
   function onAddQuestion(newQuestion){
     setQuestions([...questions, newQuestion]);
   }
+  function onDeleteQuestion(deletedQuestionId) {
+    fetch(`http://localhost:4000/questions/${deletedQuestionId}`, {
+      method: "DELETE",
+    })
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error("Failed to delete question");
+        }
+        setQuestions((prevQuestions) => prevQuestions.filter((q) => q.id !== deletedQuestionId));
+      })
+      .catch((error) => console.error("Error deleting question:", error));
+  }
+  
 
   return (
     <main>
       <AdminNavBar onChangePage={setPage} />
       {page === "Form" ? 
       <QuestionForm onAddQuestion={onAddQuestion}/> : 
-      <QuestionList questions={questions}/>}
+      <QuestionList questions={questions} onDeleteQuestion={onDeleteQuestion}/>}
     </main>
   );
 }
